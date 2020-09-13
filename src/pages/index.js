@@ -4,6 +4,8 @@ import SEO from "../components/seo"
 import StartForm from "../components/StartForm"
 import TwilioVideo from "twilio-video"
 
+import './index.css'
+
 const Video = ({ token }) => {
   const localVidRef = useRef()
   const remoteVidRef = useRef()
