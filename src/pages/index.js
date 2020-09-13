@@ -39,8 +39,8 @@ const Video = ({ token }) => {
 
   return (
     <>
-      <div ref={localVidRef}></div>
-      <div ref={remoteVidRef}></div>
+      <div class="video-container" ref={localVidRef}></div>
+      <div class="video-container" ref={remoteVidRef}></div>
     </>
   )
 }
