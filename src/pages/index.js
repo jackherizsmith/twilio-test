@@ -19,11 +19,14 @@ const Video = ({ token }) => {
           console.log("Participant joined: ", participant)
           //attach remote tracks
           participant.tracks.forEach(publication => {
-            // if (publication.isSubscribed) {
+            if (publication.isSubscribed) {
               const track = publication.track
 
               remoteVidRef.current.appendChild(track.attach())
-            // }
+            }
+          })
+          participant.on("trackSubscribed", track => {
+            remoteVidRef.current.appendChild(track.attach());
           })
         }
         room.participants.forEach(addParticipant)
