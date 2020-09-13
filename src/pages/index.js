@@ -16,6 +16,7 @@ const Video = ({ token }) => {
         })
 
         const addParticipant = participant => {
+          console.log("Participant joined: ", participant.identity)
           //attach remote tracks
           participant.tracks.forEach(publication => {
             if (publication.isSubscribed) {
