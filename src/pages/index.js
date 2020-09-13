@@ -5,28 +5,28 @@ import StartForm from "../components/StartForm"
 import TwilioVideo from "twilio-video"
 
 const Video = ({ token }) => {
-  const localVidRef = useRef();
-  const remoteVidRef = useRef();
+  const localVidRef = useRef()
+  const remoteVidRef = useRef()
   useEffect(() => {
-    TwilioVideo
-    .connect(token, { video: true, audio: true, name: "test" })
-    .then(room => {
-      //attach local video
-        TwilioVideo.createLocalVideoTrack()
-        .then(track=>{
-          localVidRef.current.appendChild(track.attach());
+    TwilioVideo.connect(token, { video: true, audio: true, name: "test" }).then(
+      room => {
+        //attach local video
+        TwilioVideo.createLocalVideoTrack().then(track => {
+          localVidRef.current.appendChild(track.attach())
         })
 
-        //attach remote tracks
-        room.participants.forEach(participant => {
+        const addParticipant = participant => {
+          //attach remote tracks
           participant.tracks.forEach(publication => {
-            if (publication.isSubscribed){
-              const track = publication.track;
+            if (publication.isSubscribed) {
+              const track = publication.track
 
-              remoteVidRef.current.appendChild(track.attach());
+              remoteVidRef.current.appendChild(track.attach())
             }
           })
-        })
+        }
+        room.participants.forEach(addParticipant)
+        room.on("participantConnected", addParticipant)
       }
     )
   }, [token])
