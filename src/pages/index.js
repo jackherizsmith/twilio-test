@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
 import StartForm from "../components/StartForm"
 import TwilioVideo from "twilio-video"
 
@@ -38,10 +37,10 @@ const Video = ({ token }) => {
   }, [token])
 
   return (
-    <>
-      <div class="video-container" ref={localVidRef}></div>
-      <div class="video-container" ref={remoteVidRef}></div>
-    </>
+    <div class="video-container" >
+      <div ref={localVidRef}></div>
+      <div ref={remoteVidRef}></div>
+    </div>
   )
 }
 
@@ -50,13 +49,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
-      <h1>Twilio test</h1>
       {!token ? <StartForm storeToken={setToken} /> : <Video token={token} />}
-      <p>
-        1. Show local video 2. Connect to a room 3. Show participants' video 4.
-        Handle events
-      </p>
     </Layout>
   )
 }
